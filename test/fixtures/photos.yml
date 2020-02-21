@@ -4,8 +4,10 @@ one:
   title: MyString
   caption: MyString
   resource: MyString
+  hidden: false
 
 two:
   title: MyString
   caption: MyString
   resource: MyString
+  hidden: false

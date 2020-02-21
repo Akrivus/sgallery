@@ -1,9 +1,10 @@
-class CreateImages < ActiveRecord::Migration[6.0]
+class CreatePhotos < ActiveRecord::Migration[6.0]
   def change
-    create_table :images do |t|
+    create_table :photos do |t|
       t.string :title
       t.string :caption
       t.string :resource
+      t.boolean :hidden
 
       t.timestamps
     end
