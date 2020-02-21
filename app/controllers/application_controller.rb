@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  load_and_authorize_resource only: [:show, :edit, :update, :destroy]
   helper_method :current_user
   helper_method :logged_in?
 
