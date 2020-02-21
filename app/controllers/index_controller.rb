@@ -1,11 +1,8 @@
 class IndexController < ApplicationController
   def index
-    
-  end
-  def authenticate
-    # index_params
+    render :index
   end
   def login
-    
+    render :login
   end
 end

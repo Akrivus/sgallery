@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  post '/login', to: 'index#authenticate'
+  resources :photos, :comments, :albums
+  resources :users do
+    
+  end
+
   get '/', to: 'index#index'
-  get '/login', to: 'index#login'
-  
-  resources :photos
-  resources :comments
-  resources :albums
-  resources :images
-  resources :users
 end

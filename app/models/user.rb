@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  has_many :images
+  has_secure_password
+
+  has_many :photos
   has_many :comments
   has_many :albums
 

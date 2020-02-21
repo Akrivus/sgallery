@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # GET /users/login
+  def login
+  end
+
   # GET /users/1/edit
   def edit
   end
@@ -33,6 +37,18 @@ class UsersController < ApplicationController
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /users/authenticate
+  def authenticate
+    @user = User.find_by(email: user_params[:email]).try(:authenticate, user_params[:password])
+    if @user
+      session[:user_id] = @user.id
+      redirect_to '/', notice: 'Logged in successfully.'
+    else
+      flash.now[:error] = 'Incorrect email/password combination.'
+      render :login, notice 
     end
   end
 
@@ -68,6 +84,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_digest, :admin)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
     end
 end

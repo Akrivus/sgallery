@@ -22,15 +22,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_173458) do
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "title"
-    t.string "caption"
-    t.string "resource"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+  en
 
   create_table "photos", force: :cascade do |t|
     t.string "title"
