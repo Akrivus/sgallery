@@ -25,7 +25,6 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
-
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
