@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_173458) do
+ActiveRecord::Schema.define(version: 2020_02_22_025407) do
 
   create_table "albums", force: :cascade do |t|
     t.string "title"
@@ -22,7 +22,15 @@ ActiveRecord::Schema.define(version: 2020_02_21_173458) do
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  en
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "title"
+    t.string "caption"
+    t.string "resource"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string "title"
@@ -40,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_173458) do
     t.boolean "admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
   end
 
 end
