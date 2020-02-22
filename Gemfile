@@ -10,8 +10,10 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-gem 'aws-sdk-s3', '~> 1.60', '>= 1.60.2'
 gem 'cancan', '~> 1.6', '>= 1.6.10'
+gem 'will_paginate', '~> 3.1.0'
+gem 'carrierwave', '~> 2.0'
+gem 'fog-aws'
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
