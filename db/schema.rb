@@ -10,26 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_025407) do
+ActiveRecord::Schema.define(version: 2020_02_23_163423) do
 
   create_table "albums", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "title"
-    t.string "caption"
-    t.string "resource"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "photo_id"
+    t.index ["photo_id"], name: "index_comments_on_photo_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -39,6 +37,11 @@ ActiveRecord::Schema.define(version: 2020_02_22_025407) do
     t.boolean "hidden"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "tags"
+    t.integer "user_id"
+    t.integer "album_id"
+    t.index ["album_id"], name: "index_photos_on_album_id"
+    t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,4 +54,9 @@ ActiveRecord::Schema.define(version: 2020_02_22_025407) do
     t.string "avatar"
   end
 
+  add_foreign_key "albums", "users"
+  add_foreign_key "comments", "photos"
+  add_foreign_key "comments", "users"
+  add_foreign_key "photos", "albums"
+  add_foreign_key "photos", "users"
 end

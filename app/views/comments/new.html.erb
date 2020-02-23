@@ -1,5 +1,22 @@
-<h1>New Comment</h1>
-
-<%= render 'form', comment: @comment %>
-
-<%= link_to 'Back', comments_path %>
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-12">
+    <div class="card my-2">
+      <%= image_tag @photo.resource_url, class: 'card-image-top', height: 500 %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @photo.title %></h2>
+        <p class="card-text"><%= @photo.caption %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= link_to 'Leave a comment.', "#{new_comment_url}?photo_id=#{@photo.id}", class: 'text-primary' %>
+        </li>
+        <% @photo.comments.each do |comment| %>
+          <li class="list-group-item">
+            <label><%= comment.user.name %>:</label>
+            <%= comment.body %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

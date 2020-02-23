@@ -1,2 +1,39 @@
-<h1>Index#index</h1>
-<p>Find me in app/views/index/index.html.erb</p>
+<div class="row">
+  <div class="col-sm-7 col-12 order-sm-1 order-2">
+    <div class="row justify-content-center">
+      <% [0, 1, 2, 3, 4, 5, 6, 7, 8].shuffle.each do |i| %>
+        <div class="col-3 m-1 p-0">
+          <%= image_tag "/images/#{i}.jpg", class: 'w-100 rounded' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-sm-5 col-12 order-sm-2 order-1">
+    <h1 class="mt-2">The friendly photo-sharing platform.</h1>
+    <p>On PhotoGo, a picture is worth a thousand words, start your story here.</p>
+    <div class="card my-1">
+      <div class="card-body">
+        <% if logged_in? %>
+          <h5 class="card-title">Welcome back <%= current_user.name %>!</h2>
+          <p>Your story is waiting to be continued on PhotoGo.</p>
+          <%= link_to 'Go to profile', current_user, class: 'btn btn-primary' %>
+        <% else %>
+          <h5 class="card-title">Log In</h2>
+          <%= form_with(url: '/users/login', method: 'post') do |form| %>
+            <div class="form-group">
+              <%= form.label :email, 'E-mail address' %>
+              <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>
+              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <%= form.label :password %>
+              <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password.' %>
+            </div>
+            <%= form.submit 'Continue', class: 'btn btn-primary w-100' %>
+            <small class="form-text">Don't have an account? <%= link_to 'Sign up!', new_user_url, class: 'text-primary' %></small>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

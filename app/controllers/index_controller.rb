@@ -1,8 +1,13 @@
 class IndexController < ApplicationController
+
+  # GET /
   def index
     render :index
   end
-  def login
-    render :login
+
+  # GET /logout
+  def logout
+    session[:user_id] = nil
+    redirect_to '/'
   end
 end

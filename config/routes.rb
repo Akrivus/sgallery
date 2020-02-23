@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources :photos, :comments, :albums, :users
-  post '/users/authenticate', to: 'users#authenticate'
-  get '/users/login', to: 'users#login'
+  resources :comments, :albums
+  resources :photos do
+    get 'search', on: :collection
+  end
+  resources :users do
+    post 'login', on: :collection
+    get 'browse', on: :collection
+  end
+  get '/logout', to: 'index#logout'
   get '/', to: 'index#index'
 end

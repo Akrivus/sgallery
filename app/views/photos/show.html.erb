@@ -1,24 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @photo.title %>
-</p>
-
-<p>
-  <strong>Caption:</strong>
-  <%= @photo.caption %>
-</p>
-
-<p>
-  <strong>Resource:</strong>
-  <%= @photo.resource %>
-</p>
-
-<p>
-  <strong>Hidden:</strong>
-  <%= @photo.hidden %>
-</p>
-
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-12">
+    <div class="card my-2">
+      <%= image_tag @photo.resource_url, class: 'card-image-top', height: 500 %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @photo.title %></h2>
+        <p class="card-text"><%= @photo.caption %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= link_to 'Leave a comment.', "#{new_comment_url}?photo_id=#{@photo.id}", class: 'text-primary' %>
+        </li>
+        <% @photo.comments.each do |comment| %>
+          <li class="list-group-item">
+            <label><%= comment.user.name %>:</label>
+            <%= comment.body %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

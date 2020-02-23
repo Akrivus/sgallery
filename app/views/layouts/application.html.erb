@@ -8,8 +8,41 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <a class="navbar-brand" href="#"><span class="text-primary">Photo</span><span class="text-warning">Go</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to 'Home', '/', class: 'nav-link' %>
+          </li>
+          <% if logged_in? %>
+          <li class="nav-item active">
+            <%= link_to 'Browse', '/users/browse', class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Profile', user_path(current_user), class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Logout', '/logout', class: 'nav-link' %>
+          </li>
+          <% end %>
+        </ul>
+        <% unless logged_in? %>
+          <%= link_to 'Sign Up', '/users/new', class: 'btn btn-outline-success' %>
+        <% else %>
+          <%= form_for '/photos/search', html: { class: 'form-inline mt-1 mt-md-0' } do |form| %>
+            <%= form.text_field :query, class: 'form-control mr-1', placeholder: 'Search photos.' %>
+            <%= form.submit 'Search', class: 'btn btn-primary' %>
+          <% end %>
+        <% end %>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>

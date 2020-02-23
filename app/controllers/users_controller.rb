@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+
   end
 
   # GET /users/new
@@ -17,12 +18,25 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /users/login
-  def login
-  end
-
   # GET /users/1/edit
   def edit
+
+  end
+
+  # POST /users/login
+  # POST /users/login.json
+  def login
+    @user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
+    set_current_user(@user) if @user
+    respond_to do |format|
+      if @user
+        format.html { redirect_to @user }
+        format.json { render :login, status: :ok, location: @user }
+      else
+        format.html { redirect_to '/' }
+        format.json { render json: { password: 'Incorrect password.' }, status: :unauthorized }
+      end
+    end
   end
 
   # POST /users
@@ -31,24 +45,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        UserMailer.with(user: set_current_user(@user)).welcome_email.deliver_later
+        format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
+        format.html { render :new, notice: @photo.errors.full_messages.join("<br />") }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # POST /users/authenticate
-  def authenticate
-    @user = User.find_by(email: user_params[:email]).try(:authenticate, user_params[:password])
-    if @user
-      session[:user_id] = @user.id
-      redirect_to '/', notice: 'Logged in successfully.'
-    else
-      flash.now[:error] = 'Incorrect email/password combination.'
-      render :login, notice 
     end
   end
 
@@ -57,10 +60,10 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: @photo.errors.full_messages.join("<br />") }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -71,7 +74,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url }
       format.json { head :no_content }
     end
   end
@@ -84,6 +87,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
     end
 end
