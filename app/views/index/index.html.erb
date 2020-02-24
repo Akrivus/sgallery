@@ -24,6 +24,7 @@
             <%= form.label :password %>
             <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password.' %>
           </div>
+          <div class="invalid-feedback" id="notice"><%= notice %></div>
           <%= form.submit 'Continue', class: 'btn btn-primary w-100' %>
           <small class="form-text">Don't have an account? <%= link_to 'Sign up!', new_user_url, class: 'text-primary' %></small>
         <% end %>

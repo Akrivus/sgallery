@@ -26,10 +26,10 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
     set_current_user(@user) if @user
     respond_to do |format|
-      if @user
-        format.html { redirect_to @user }
+      unless @user
+        format.html { redirect_to '/', notice: 'Incorrect password.' }
       else
-        format.html { redirect_to '/' }
+        format.html { redirect_to @user }
       end
     end
   end
