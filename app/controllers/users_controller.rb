@@ -39,7 +39,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        UserMailer.with(user: set_current_user(@user)).welcome_email.deliver_now
+        set_current_user(@user)
+        UserMailer.with(email: user_params[:email], name: user_params[:name]).welcome_email.deliver_now
         format.html { redirect_to @user }
       else
         format.html { render :new }
