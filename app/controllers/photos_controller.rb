@@ -3,7 +3,11 @@ class PhotosController < ApplicationController
 
   # GET /photos
   def index
-    @photos = Photo.where(hidden: false)
+    unless params[:query].blank?
+      @photos = Photo.where(hidden: false).where("lower(title) LIKE :query", query: "%#{params[:query].downcase}%")
+    else
+      @photos = Photo.where(hidden: false)
+    end
   end
 
   # GET /photos/1
