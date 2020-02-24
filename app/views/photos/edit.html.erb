@@ -5,6 +5,7 @@
         <h5 class="card-title">New Photo</h2>
         <%= form_with(model: @photo, local: true) do |form| %>
           <%= form.hidden_field :user_id, value: current_user.id %>
+          <%= form.hidden_field :photo_id, value: @photo.id %>
           <div class="form-group">
             <%= form.label :title %>
             <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>

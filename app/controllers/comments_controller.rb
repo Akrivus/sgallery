@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @photo = Photo.find(params[:photo_id])
-    @comment = Comment.new
+    @comment = Comment.new()
   end
 
   # GET /comments/1/edit
@@ -47,7 +47,6 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
-    @photo = @comment.photo
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to @photo, notice: 'Comment was successfully destroyed.' }
@@ -57,6 +56,7 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
+      @photo = Photo.find(params[:photo_id])
       @comment = Comment.find(params[:id])
     end
 
