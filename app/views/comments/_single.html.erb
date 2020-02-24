@@ -9,7 +9,7 @@
     <p><%= comment.body %></p>
   </div>
   <div class="col-1">
-    <% if can? :delete, comment %>
+    <% if can? :destroy, comment %>
       <%= link_to 'Delete', photo_comment_url(comment.photo, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
     <% end %>
   </div>

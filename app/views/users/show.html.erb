@@ -18,7 +18,7 @@
       <div class="card-body text-center">
         <%= image_tag @user.avatar_url, class: 'rounded-circle my-1', height: 256, width: 256 %>
         <h4 class="card-title"><%= @user.name %></h4>
-        <% if can? :delete, @user %>
+        <% if can? :destroy, @user %>
           <%= link_to 'Delete', user_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
         <% end %>
         <% if can? :edit, @user %>

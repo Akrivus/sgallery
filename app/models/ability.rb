@@ -8,8 +8,8 @@ class Ability
       can :manage, Comment, user: { id: user.id }
       can :manage, Album, user: { id: user.id }
       can :manage, User, id: user.id
-      can :delete, Comment, photo: { user: { id: user.id } }
-      can :delete, :all if user.admin?
+      can :destroy, Comment, photo: { user: { id: user.id } }
+      can :destroy, :all if user.admin?
     end
   end
 end

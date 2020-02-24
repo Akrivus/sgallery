@@ -10,7 +10,7 @@
     <div class="card">
       <div class="card-body text-center">
         <h4 class="card-title"><%= @album.title %></h4>
-        <% if can? :delete, @album %>
+        <% if can? :destroy, @album %>
           <%= link_to 'Delete', album_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
         <% end %>
         <% if can? :edit, @album %>
