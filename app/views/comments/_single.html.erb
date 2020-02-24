@@ -1,0 +1,16 @@
+<div class="row <%= 'bg-warning' if comment.eql? highlight %>">
+  <div class="col-1">
+    <a class="avatar float-left" href="<%= user_path(comment.user) %>">
+      <%= image_tag comment.user.avatar_url %>
+    </a>
+  </div>
+  <div class="col">
+    <b><%= comment.user.name %></b>
+    <p><%= comment.body %></p>
+  </div>
+  <div class="col-1">
+    <% if can? :delete, comment %>
+      <%= link_to 'Delete', photo_comment_url(comment.photo, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
+    <% end %>
+  </div>
+</div>

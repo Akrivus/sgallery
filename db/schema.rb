@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2020_02_23_163423) do
     t.boolean "hidden"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "tags"
     t.integer "user_id"
     t.integer "album_id"
     t.index ["album_id"], name: "index_photos_on_album_id"

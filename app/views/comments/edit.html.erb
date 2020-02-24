@@ -1,6 +1,23 @@
-<h1>Editing Comment</h1>
-
-<%= render 'form', comment: @comment %>
-
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', photo_comments_path(@photo) %>
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-12">
+    <div class="card my-2">
+      <%= image_tag @photo.resource_url, class: 'card-image-top', height: 500 %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @photo.title %></h2>
+        <p class="card-text"><%= @photo.caption %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% @photo.comments.each do |comment| %>
+          <% if comment.eql? @comment %>
+            <%= render 'form', photo: @photo, comment: @comment %>
+          <% else %>
+            <li class="list-group-item">
+              <label><%= comment.user.name %>:</label>
+              <%= comment.body %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

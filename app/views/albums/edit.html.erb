@@ -1,6 +1,10 @@
-<h1>Editing Album</h1>
-
-<%= render 'form', album: @album %>
-
-<%= link_to 'Show', @album %> |
-<%= link_to 'Back', albums_path %>
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-12">
+    <div class="card my-2">
+      <div class="card-body">
+        <h5 class="card-title">Edit Album</h2>
+        <%= render 'form', album: @album %>
+      </div>
+    </div>
+  </div>
+</div>

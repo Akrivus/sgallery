@@ -28,7 +28,7 @@ class AlbumsController < ApplicationController
     @album = Album.new(album_params)
     respond_to do |format|
       if @album.save
-        format.html { redirect_to current_user, notice: 'Album was successfully created.' }
+        format.html { redirect_to current_user }
       else
         format.html { render :new }
       end
@@ -40,11 +40,9 @@ class AlbumsController < ApplicationController
   def update
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-        format.json { render :show, status: :ok, location: @album }
+        format.html { redirect_to @album }
       else
         format.html { render :edit }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,8 +52,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album.destroy
     respond_to do |format|
-      format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to albums_url }
     end
   end
 

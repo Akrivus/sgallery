@@ -16,15 +16,7 @@
         <li class="list-group-item">
           <%= link_to 'Leave a comment.', "#{new_photo_comment_url(@photo)}", class: 'text-primary' %>
         </li>
-        <% @photo.comments.each do |comment| %>
-          <li class="list-group-item">
-            <label><%= comment.user.name %>:</label>
-            <%= comment.body %>
-            <% if can? :delete, comment %>
-              <%= link_to 'Delete', photo_comment_url(@photo, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
-            <% end %>
-          </li>
-        <% end %>
+        <%= render 'comments/thread', comments: @photo.comments, highlight: nil %>
       </ul>
     </div>
   </div>

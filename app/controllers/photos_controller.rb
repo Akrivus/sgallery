@@ -28,7 +28,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to current_user }
+        format.html { redirect_to @photo }
       else
         format.html { render :new }
       end
@@ -53,7 +53,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
+      format.html { redirect_to photos_url }
     end
   end
 

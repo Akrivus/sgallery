@@ -1,22 +1,8 @@
-<%= form_with(model: comment, local: true) do |form| %>
-  <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-        <% comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<li class="list-group-item">
+  <%= form_for [photo, comment], html: { class: 'form-inline' } do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :photo_id, value: photo.id %>
+    <%= form.text_field :body, class: 'form-control w-75', placeholder: 'Leave a comment.' %>
+    <%= form.submit 'Comment', class: 'btn btn-primary w-25' %>
   <% end %>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</li>

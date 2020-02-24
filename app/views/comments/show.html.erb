@@ -1,9 +1,1 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @comment.body %>
-</p>
-
-<%= link_to 'Edit', edit_photo_comment_path(@comment) %> |
-<%= link_to 'Back', photo_comments_path(@photo) %>
+<% render 'photo/show', highlight: @comment %>

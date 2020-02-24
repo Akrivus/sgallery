@@ -1,0 +1,5 @@
+<li class="list-group-item">
+  <% comments.each do |comment| %>
+    <%= render 'comments/single', comment: comment, highlight: highlight %>
+  <% end %>
+</li>

@@ -1,22 +1,11 @@
 <%= form_with(model: album, local: true) do |form| %>
-  <% if album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(album.errors.count, "error") %> prohibited this album from being saved:</h2>
-
-      <ul>
-        <% album.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <% @album.errors.full_messages.each do |error| %>
+    <div class="invalid-feedback"><%= error %></div>
+  <% end %>
+  <%= form.submit class: 'btn btn-primary w-100' %>
 <% end %>
