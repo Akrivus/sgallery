@@ -20,6 +20,9 @@
           <li class="list-group-item">
             <label><%= comment.user.name %>:</label>
             <%= comment.body %>
+            <% if can? :delete, comment %>
+              <%= link_to 'Delete', comment_url(comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
+            <% end %>
           </li>
         <% end %>
       </ul>
