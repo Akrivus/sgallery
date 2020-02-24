@@ -3,7 +3,7 @@
     <div class="card my-2">
       <div class="card-body">
         <h5 class="card-title">Sign Up</h2>
-        <%= form_with(model: @user) do |form| %>
+        <%= form_with(model: @user, local: true) do |form| %>
           <div class="form-group">
             <%= form.label :email, 'E-mail address' %>
             <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>
@@ -23,7 +23,9 @@
               <%= form.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm password.' %>
             </div>
           </div>
-          <div class="invalid-feedback" id="notice"><%= notice %></div>
+          <% @user.errors.full_messages.each do |error| %>
+            <div class="invalid-feedback"><%= error %></div>
+          <% end %>
           <%= form.submit 'Sign Up', class: 'btn btn-primary w-100' %>
         <% end %>
       </div>

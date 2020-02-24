@@ -1,40 +1,45 @@
-<div class="row">
+<div class="row my-1">
   <div class="col-sm-7 col-12 order-sm-1 order-2">
-    <div class="row justify-content-center">
-      <% @user.photos.paginate(page: params[:page]).each do |photo| %>
-        <div class="col-3 m-1 p-0">
-          <div class="card">
-            <%= image_tag photo.resource_url, class: 'card-image-top', height: 256 %>
-            <div class="card-body">
-              <h5 class="card-title"><%= photo.title %></h5>
-              <p class="card-text"><%= photo.caption %></p>
-              <%= link_to 'Discuss', photo, class: 'btn btn-primary' %>
-            </div>
+    <div class="card-columns">
+      <% if current_user.eql? @user %>
+        <div class="card card-inverse">
+          <div class="card-body">
+            <%= link_to 'Upload Photo', new_photo_url, class: 'btn btn-primary w-100' %>
           </div>
         </div>
+      <% end %>
+      <% @user.photos.each do |photo| %>
+        <%= render 'photos/photo', photo: photo %>
       <% end %>
     </div>
   </div>
   <div class="col-sm-5 col-12 order-sm-2 order-1">
-    <div class="card my-1">
-      <%= image_tag @user.avatar_url, class: 'card-image-top', height: 256 %>
+    <div class="card">
+      <div class="card-body text-center">
+        <%= image_tag @user.avatar_url, class: 'rounded-circle my-1', height: 256, width: 256 %>
+        <h4 class="card-title"><%= @user.name %></h4>
+        <% if can? :delete, @user %>
+          <%= link_to 'Delete', user_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
+        <% end %>
+        <% if can? :edit, @user %>
+          <%= link_to 'Edit', edit_user_url, class: 'btn btn-primary w-25' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="card">
       <div class="card-body">
-        <h5 class="card-title"><%= @user.name %></h5>
-        <div class="row">
-          <% if can? :edit, User, @user %>
-          <div class="col">
-            <%= link_to 'Edit Profile', edit_user_url, class: 'btn btn-primary w-100' %>
-          </div>
+        <h4 class="card-title">Albums</h4>
+        <p class="card-text">Organize photos in albums.</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <%= link_to 'Create a new album', new_album_url, class: 'card-title text-primary' %>
+          </li>
+          <% @user.albums.each do |album| %>
+            <li class="list-group-item">
+              <%= link_to album.title, album, class: 'card-title text-primary' %>
+            </li>
           <% end %>
-          <% if current_user == @user %>
-            <div class="col">
-              <%= link_to 'New Photo', new_photo_url, class: 'btn btn-primary w-100' %>
-            </div>
-            <div class="col">
-              <%= link_to 'New Album', new_album_url, class: 'btn btn-primary w-100' %>
-            </div>
-          <% end %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>

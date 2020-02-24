@@ -1,9 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @album.title %>
-</p>
-
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Back', albums_path %>
+<div class="row my-1">
+  <div class="col-sm-9 col-12 order-sm-1 order-2">
+    <div class="card-columns">
+      <% @album.photos.each do |photo| %>
+        <%= render 'photos/photo', photo: photo %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-sm-3 col-12 order-sm-2 order-1">
+    <div class="card">
+      <div class="card-body text-center">
+        <h4 class="card-title"><%= @album.title %></h4>
+        <% if can? :delete, @album %>
+          <%= link_to 'Delete', album_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
+        <% end %>
+        <% if can? :edit, @album %>
+          <%= link_to 'Edit', edit_album_url, class: 'btn btn-primary w-25' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

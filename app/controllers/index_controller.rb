@@ -2,7 +2,11 @@ class IndexController < ApplicationController
 
   # GET /
   def index
-    render :index
+    if logged_in?
+      redirect_to current_user
+    else
+      render :index
+    end
   end
 
   # GET /logout

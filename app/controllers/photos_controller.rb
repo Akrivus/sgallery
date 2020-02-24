@@ -2,13 +2,11 @@ class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
-  # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = Photo.where(hidden: false)
   end
 
   # GET /photos/1
-  # GET /photos/1.json
   def show
   end
 
@@ -22,16 +20,13 @@ class PhotosController < ApplicationController
   end
 
   # POST /photos
-  # POST /photos.json
   def create
-    @photo = Photo.new(photo_params.merge({ user_id: current_user.id }))
+    @photo = Photo.new(photo_params)
     respond_to do |format|
       if @photo.save
         format.html { redirect_to current_user }
-        format.json { render :show, status: :created, location: @photo }
       else
-        format.html { render :new, notice: @photo.errors.full_messages.join("<br />") }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+        format.html { render :new }
       end
     end
   end
@@ -40,12 +35,11 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
+      params[:photo].delete(:resource)
       if @photo.update(photo_params)
         format.html { redirect_to @photo }
-        format.json { render :show, status: :ok, location: @photo }
       else
-        format.html { render :edit, notice: @photo.errors.full_messages.join("<br />") }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+        format.html { render :edit }
       end
     end
   end
@@ -56,7 +50,6 @@ class PhotosController < ApplicationController
     @photo.destroy
     respond_to do |format|
       format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -68,6 +61,6 @@ class PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:title, :caption, :resource, :hidden)
+      params.require(:photo).permit(:title, :caption, :resource, :hidden, :user_id, :album_id)
     end
 end

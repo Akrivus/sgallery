@@ -2,13 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
 
   end
@@ -24,58 +22,47 @@ class UsersController < ApplicationController
   end
 
   # POST /users/login
-  # POST /users/login.json
   def login
     @user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
     set_current_user(@user) if @user
     respond_to do |format|
       if @user
         format.html { redirect_to @user }
-        format.json { render :login, status: :ok, location: @user }
       else
         format.html { redirect_to '/' }
-        format.json { render json: { password: 'Incorrect password.' }, status: :unauthorized }
       end
     end
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         UserMailer.with(user: set_current_user(@user)).welcome_email.deliver_later
         format.html { redirect_to @user }
-        format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new, notice: @photo.errors.full_messages.join("<br />") }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :new }
       end
     end
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user }
-        format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit, notice: @photo.errors.full_messages.join("<br />") }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :edit }
       end
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }
-      format.json { head :no_content }
     end
   end
 

@@ -8,7 +8,12 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <%= link_to 'Leave a comment.', "#{new_comment_url}?photo_id=#{@photo.id}", class: 'text-primary' %>
+          <%= form_for @comment, html: { class: 'form-inline' } do |form| %>
+            <%= form.hidden_field :user_id, value: current_user.id %>
+            <%= form.hidden_field :photo_id, value: @photo.id %>
+            <%= form.text_field :body, class: 'form-control mr-1', placeholder: 'Leave a comment.' %>
+            <%= form.submit 'Post', class: 'btn btn-primary' %>
+          <% end %>
         </li>
         <% @photo.comments.each do |comment| %>
           <li class="list-group-item">

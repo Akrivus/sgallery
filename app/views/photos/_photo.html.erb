@@ -1,0 +1,9 @@
+<a href="<%= photo_url(photo) %>">
+  <div class="card text-white">
+    <img class="card-img" src="<%= photo.resource_url %>" alt="<%= photo.caption %>">
+    <div class="card-img-overlay">
+      <h5 class="card-title text-white"><%= photo.title %></h5>
+      <p class="card-text"><%= photo.caption %></p>
+    </div>
+  </div>
+</a>

@@ -13,25 +13,19 @@
     <p>On PhotoGo, a picture is worth a thousand words, start your story here.</p>
     <div class="card my-1">
       <div class="card-body">
-        <% if logged_in? %>
-          <h5 class="card-title">Welcome back <%= current_user.name %>!</h2>
-          <p>Your story is waiting to be continued on PhotoGo.</p>
-          <%= link_to 'Go to profile', current_user, class: 'btn btn-primary' %>
-        <% else %>
-          <h5 class="card-title">Log In</h2>
-          <%= form_with(url: '/users/login', method: 'post') do |form| %>
-            <div class="form-group">
-              <%= form.label :email, 'E-mail address' %>
-              <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>
-              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <%= form.label :password %>
-              <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password.' %>
-            </div>
-            <%= form.submit 'Continue', class: 'btn btn-primary w-100' %>
-            <small class="form-text">Don't have an account? <%= link_to 'Sign up!', new_user_url, class: 'text-primary' %></small>
-          <% end %>
+        <h5 class="card-title">Log In</h2>
+        <%= form_with(url: '/users/login', method: 'post') do |form| %>
+          <div class="form-group">
+            <%= form.label :email, 'E-mail address' %>
+            <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <%= form.label :password %>
+            <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password.' %>
+          </div>
+          <%= form.submit 'Continue', class: 'btn btn-primary w-100' %>
+          <small class="form-text">Don't have an account? <%= link_to 'Sign up!', new_user_url, class: 'text-primary' %></small>
         <% end %>
       </div>
     </div>

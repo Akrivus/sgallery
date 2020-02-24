@@ -5,6 +5,12 @@
       <div class="card-body">
         <h5 class="card-title"><%= @photo.title %></h2>
         <p class="card-text"><%= @photo.caption %></p>
+        <% if can? :delete, @photo %>
+          <%= link_to 'Delete', photo_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
+        <% end %>
+        <% if can? :edit, @photo %>
+          <%= link_to 'Edit', edit_photo_url, class: 'btn btn-primary w-25' %>
+        <% end %>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">

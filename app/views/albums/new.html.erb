@@ -1,5 +1,20 @@
-<h1>New Album</h1>
-
-<%= render 'form', album: @album %>
-
-<%= link_to 'Back', albums_path %>
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-12">
+    <div class="card my-2">
+      <div class="card-body">
+        <h5 class="card-title">New Album</h2>
+        <%= form_with(model: @album, local: true) do |form| %>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+          <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>
+          </div>
+          <% @album.errors.full_messages.each do |error| %>
+            <div class="invalid-feedback"><%= error %></div>
+          <% end %>
+          <%= form.submit 'Create Album', class: 'btn btn-primary w-100' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

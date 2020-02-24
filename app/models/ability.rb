@@ -4,13 +4,12 @@ class Ability
   def initialize(user)
     can :read, :all
     unless user.nil?
-      can :manage, Comment, Photo, Album, user_id: user.id
+      can :manage, Photo, user: { id: user.id }
+      can :manage, Comment, user: { id: user.id }
+      can :manage, Album, user: { id: user.id }
       can :manage, User, id: user.id
-      can :destroy, Comment, photo: { user_id: user.id }
-      can :read, Photo, hidden: false
-      if user.admin?
-        can :manage, :all
-      end
+      can :delete, Comment, photo: { user: { id: user.id } }
+      can :delete, :all if user.admin?
     end
   end
 end
