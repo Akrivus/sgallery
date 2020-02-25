@@ -75,6 +75,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+      params[:user].delete(:admin) unless current_user.admin?
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :admin)
     end
 end

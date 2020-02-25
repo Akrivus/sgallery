@@ -1,7 +1,9 @@
 <%= form_with(model: user, html: { multipart: true }) do |form| %>
-  <p class="card-text text-center">
-    <%= image_tag user.avatar_url, class: 'rounded-circle my-1', height: 160, width: 160 %> 
-  </p>
+  <% if user.persisted? %>
+    <p class="card-text text-center">
+      <%= image_tag user.avatar_url, class: 'rounded-circle my-1', height: 160, width: 160 %> 
+    </p>
+  <% end %>
   <div class="form-group">
     <div class="form-group">
       <div class="custom-file">
@@ -29,6 +31,14 @@
       <%= form.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm password.' %>
     </div>
   </div>
+  <% if user.persisted? and current_user.admin? %>
+    <div class="form-group">
+      <div class="form-check">
+        <%= form.check_box :admin, class: 'form-check-input' %>
+        <%= form.label :admin, 'This user is an admin?', class: 'form-check-label' %>
+      </div>
+    </div>
+  <% end %>
   <% user.errors.full_messages.each do |error| %>
     <div class="invalid-feedback"><%= error %></div>
   <% end %>
