@@ -2,8 +2,7 @@
   <div class="col-sm-6 col-12">
     <div class="card my-2">
       <div class="card-body">
-        <h5 class="card-title">Sign Up</h2>
-        <%= render 'form', user: @user %>
+        <%= render 'comments/thread', comments: @photo.comments, highlight: nil %>
       </div>
     </div>
   </div>

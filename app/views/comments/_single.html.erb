@@ -1,6 +1,6 @@
 <div class="row <%= 'bg-warning' if comment.eql? highlight %>">
   <div class="col-1">
-    <a class="avatar float-left" href="<%= user_path(comment.user) %>">
+    <a class="avatar float-left" href="<%= user_url(comment.user) %>">
       <%= image_tag comment.user.avatar_url %>
     </a>
   </div>
@@ -10,7 +10,10 @@
   </div>
   <div class="col-1">
     <% if can? :destroy, comment %>
-      <%= link_to 'Delete', photo_comment_url(comment.photo, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
+      <%= link_to 'Delete', photo_comment_url(comment.photo, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small float-right text-danger' %>
+    <% end %>
+    <% if can? :edit, comment %>
+      <%= link_to 'Edit', edit_photo_comment_url(comment.photo, comment), class: 'small float-right text-primary' %>
     <% end %>
   </div>
 </div>

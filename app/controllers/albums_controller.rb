@@ -1,29 +1,27 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
 
-  # GET /albums
-  # GET /albums.json
+  # GET /users/1/albums
   def index
     @albums = Album.all
   end
 
-  # GET /albums/1
-  # GET /albums/1.json
+  # GET /users/1/albums/1
   def show
 
   end
 
-  # GET /albums/new
+  # GET /users/1/albums/new
   def new
     @album = Album.new
   end
 
-  # GET /albums/1/edit
+  # GET /users/1/albums/1/edit
   def edit
 
   end
 
-  # POST /albums
+  # POST /users/1/albums
   def create
     @album = Album.new(album_params)
     respond_to do |format|
@@ -35,8 +33,7 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /albums/1
-  # PATCH/PUT /albums/1.json
+  # PATCH/PUT /users/1/albums/1
   def update
     respond_to do |format|
       if @album.update(album_params)
@@ -47,12 +44,11 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # DELETE /albums/1
-  # DELETE /albums/1.json
+  # DELETE /users/1/albums/1
   def destroy
     @album.destroy
     respond_to do |format|
-      format.html { redirect_to albums_url }
+      format.html { redirect_to user_albums_url }
     end
   end
 

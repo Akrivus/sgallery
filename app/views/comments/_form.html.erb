@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <%= form_for [photo, comment], html: { class: 'form-inline' } do |form| %>
+  <%= form_with(model: [photo, comment], html: { class: 'form-inline' }, local: true) do |form| %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.hidden_field :photo_id, value: photo.id %>
     <%= form.text_field :body, class: 'form-control w-75', placeholder: 'Leave a comment.' %>

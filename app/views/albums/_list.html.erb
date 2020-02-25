@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-1">
-    <a class="avatar float-left" href="<%= album_url(album) %>">
+    <a class="avatar float-left" href="<%= user_album_url(album) %>">
       <% if album.photos.empty? %>
         <%= image_tag '/images/avatar.jpg' %>
       <% else %>
@@ -9,11 +9,14 @@
     </a>
   </div>
   <div class="col">
-    <%= link_to album.title, album, class: 'card-title text-primary' %>
+    <%= link_to album.title, [album.user, album], class: 'card-title text-primary' %>
   </div>
   <div class="col-1">
     <% if can? :destroy, album %>
-      <%= link_to 'Delete', album_url(album), method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right text-danger' %>
+      <%= link_to 'Delete', user_album_url(album), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small float-right text-danger' %>
+    <% end %>
+    <% if can? :edit, album %>
+      <%= link_to 'Edit', edit_user_album_url(album), class: 'small float-right text-primary' %>
     <% end %>
   </div>
 </div>

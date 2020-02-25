@@ -1,37 +1,33 @@
 <%= form_with(model: photo, local: true) do |form| %>
-  <% if photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
-      <ul>
-        <% photo.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <% if photo.persisted? %>
+    <div class="form-group">
+      <div class="custom-file">
+        <%= form.file_field :resource, class: 'custom-file-input' %>
+        <%= form.label :resource, 'Choose photo.', class: 'custom-file-label'%>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :caption %>
-    <%= form.text_field :caption %>
+    <%= form.text_field :caption, class: 'form-control', placeholder: 'Enter caption.' %>
   </div>
-
-  <div class="field">
-    <%= form.label :resource %>
-    <%= form.text_field :resource %>
+  <div class="form-group">
+    <div class="form-check">
+      <%= form.check_box :hidden, class: 'form-check-input' %>
+      <%= form.label :hidden, 'Hide this image from search?', class: 'form-check-label' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :hidden %>
-    <%= form.check_box :hidden %>
+  <div class="form-group">
+    <%= form.label :album_id, 'Album' %>
+    <%= form.select(:album_id, [['None', nil]] + current_user.albums.all.collect { |album| [ album.title, album.id ] }, {}, { class: 'form-control' }) %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <% @photo.errors.full_messages.each do |error| %>
+    <div class="invalid-feedback"><%= error %></div>
+  <% end %>
+  <%= form.submit class: 'btn btn-primary w-100' %>
 <% end %>

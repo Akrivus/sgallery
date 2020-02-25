@@ -1,28 +1,28 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # GET /comments
+  # GET /photos/1/comments
   def index
     @comments = Comment.all
   end
 
-  # GET /comments/1
+  # GET /photos/1/comments/1
   def show
     
   end
 
-  # GET /comments/new
+  # GET /photos/1/comments/new
   def new
     @photo = Photo.find(params[:photo_id])
     @comment = Comment.new()
   end
 
-  # GET /comments/1/edit
+  # GET /photos/1/comments/1/edit
   def edit
 
   end
 
-  # POST /comments
+  # POST /photos/1/comments
   def create
     @comment = Comment.new(comment_params)
     respond_to do |format|
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1
+  # PATCH/PUT /photos/1/comments/1
   def update
     respond_to do |format|
       if @comment.update(comment_params)
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
+  # DELETE /photos/1/comments/1
   def destroy
     @comment.destroy
     respond_to do |format|

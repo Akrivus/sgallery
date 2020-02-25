@@ -1,0 +1,14 @@
+<%= form_with(url: '/users/login', method: 'post', local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :email, 'E-mail address' %>
+    <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>
+    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password.' %>
+  </div>
+  <div class="invalid-feedback" id="notice"><%= notice %></div>
+  <%= form.submit 'Continue', class: 'btn btn-primary w-100' %>
+  <small class="form-text">Don't have an account? <%= link_to 'Sign up!', new_user_url, class: 'text-primary' %></small>
+<% end %>

@@ -21,7 +21,16 @@
         <p class="card-text">Organize photos in albums.</p>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <%= link_to 'Create a new album', new_album_url, class: 'card-title text-primary' %>
+            <div class="row">
+              <div class="col-1">
+                <a class="avatar float-left" href="<%= new_user_album_url(current_user) %>">
+                  <%= image_tag '/images/photo.png' %>
+                </a>
+              </div>
+              <div class="col">
+                <%= link_to 'Create a new album', new_user_album_url(current_user), class: 'card-title text-primary' %>
+              </div>
+            </div>
           </li>
           <% @user.albums.each do |album| %>
             <li class="list-group-item">
