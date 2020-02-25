@@ -20,7 +20,7 @@ class AlbumsControllerTest < ActionDispatch::IntegrationTest
       post user_albums_url, params: { album: { title: @album.title } }
     end
 
-    assert_redirected_to user_album_url(Album.last)
+    assert_redirected_to user_album_url(user, album.last)
   end
 
   test "should show album" do

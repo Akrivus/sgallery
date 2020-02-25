@@ -1,5 +1,5 @@
 <div class="row my-1">
-  <div class="col-sm-7 col-12 order-sm-1 order-2">
+  <div class="col order-sm-1 order-2">
     <div class="card-columns">
       <% if current_user.eql? @user %>
         <div class="card card-inverse">
@@ -13,32 +13,28 @@
       <% end %>
     </div>
   </div>
-  <div class="col-sm-5 col-12 order-sm-2 order-1">
-    <%= render 'profile', user: @user %>
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Albums</h4>
-        <p class="card-text">Organize photos in albums.</p>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-1">
-                <a class="avatar float-left" href="<%= new_user_album_url(current_user) %>">
-                  <%= image_tag '/images/photo.png' %>
-                </a>
-              </div>
-              <div class="col">
-                <%= link_to 'Create a new album', new_user_album_url(current_user), class: 'card-title text-primary' %>
-              </div>
-            </div>
-          </li>
-          <% @user.albums.each do |album| %>
+  <% if current_user.eql? @user %>
+    <div class="col-sm-3 col-12 order-sm-2 order-1">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Albums</h4>
+          <p class="card-text">Organize photos in albums.</p>
+          <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <%= render 'albums/list', album: album %>
+              <a class="avatar mr-1" href="<%= new_user_album_url(current_user) %>">
+                <%= image_tag '/images/photo.png' %>
+              </a>
+              <%= link_to 'Create a new album', new_user_album_url(current_user), class: 'card-title text-primary' %>
             </li>
-          <% end %>
-        </ul>
+            <% current_user.albums.each do |album| %>
+              <%= render 'albums/list', user: current_user, album: album %>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
+  <% end %>
+  <div class="col-sm-3 col-12 order-sm-2 order-1">
+    <%= render 'profile', user: @user %>
   </div>
 </div>

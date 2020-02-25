@@ -1,6 +1,6 @@
 <%= form_with(model: photo, local: true) do |form| %>
   <%= form.hidden_field :user_id, value: current_user.id %>
-  <% if photo.persisted? %>
+  <% unless photo.persisted? %>
     <div class="form-group">
       <div class="custom-file">
         <%= form.file_field :resource, class: 'custom-file-input' %>

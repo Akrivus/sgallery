@@ -4,7 +4,7 @@ class Photo < ApplicationRecord
   
   belongs_to :user
   belongs_to :album, optional: true
-  has_many :comments
+  has_many :comments, dependent: :delete_all
   
   validates :title, length: { in: 1..50 }
   validates :caption, length: { in: 1..100 }

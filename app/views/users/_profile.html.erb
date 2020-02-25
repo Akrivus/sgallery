@@ -2,11 +2,11 @@
   <div class="card-body text-center">
     <%= image_tag user.avatar_url, class: 'rounded-circle my-1', height: 160, width: 160 %>
     <h4 class="card-title"><%= user.name %></h4>
-    <% if can? :destroy, user %>
-      <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-50' %>
-    <% end %>
     <% if can? :edit, user %>
-      <%= link_to 'Edit', edit_user_url(user), class: 'btn btn-primary w-50' %>
+      <%= link_to 'Edit', edit_user_url(user), class: 'btn btn-primary w-25' %>
+    <% end %>
+    <% if can? :destroy, user %>
+      <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
     <% end %>
   </div>
 </div>

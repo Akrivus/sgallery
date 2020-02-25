@@ -1,22 +1,21 @@
-<div class="row">
-  <div class="col-1">
-    <a class="avatar float-left" href="<%= user_album_url(album) %>">
+<%= form_with(url: "#{user_album_url(user, album)}/add_photo", local: true, html: { class: 'dropzone' }) do |form| %>
+  <%= form.hidden_field :photo_id, class: 'droppable' %>
+  <li class="list-group-item">
+    <a class="avatar mr-1" href="<%= user_album_url(user, album) %>">
       <% if album.photos.empty? %>
         <%= image_tag '/images/avatar.jpg' %>
       <% else %>
         <%= image_tag album.photos.first.resource_url %>
       <% end %>
     </a>
-  </div>
-  <div class="col">
     <%= link_to album.title, [album.user, album], class: 'card-title text-primary' %>
-  </div>
-  <div class="col-1">
-    <% if can? :destroy, album %>
-      <%= link_to 'Delete', user_album_url(album), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small float-right text-danger' %>
-    <% end %>
-    <% if can? :edit, album %>
-      <%= link_to 'Edit', edit_user_album_url(album), class: 'small float-right text-primary' %>
-    <% end %>
-  </div>
-</div>
+    <p class="text-center">
+      <% if can? :destroy, album %>
+        <%= link_to 'Delete', user_album_url(user, album), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small text-danger' %>
+      <% end %>
+      <% if can? :edit, album %>
+        <%= link_to 'Edit', edit_user_album_url(user, album), class: 'small text-primary' %>
+      <% end %>
+    </p>
+  </li>
+<% end %>
