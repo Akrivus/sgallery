@@ -3,10 +3,14 @@
     <div class="card my-2">
       <%= image_tag @photo.resource_url, class: 'card-image-top', height: 500 %>
       <div class="card-body">
-        <h5 class="card-title"><%= @photo.title %></h5>
+        <h5 class="card-title">
+        <%= @photo.title %>
+        <small class="text-muted">
+          by <%= @photo.user.name %>
+        </small>
+        </h5>
         <p class="card-text">
           <%= @photo.caption %>
-          <small class="text-muted">by <%= @photo.user.name %></small>
         </p>
         <% if can? :edit, @photo %>
           <%= link_to 'Edit', edit_photo_url, class: 'btn btn-primary w-25' %>
