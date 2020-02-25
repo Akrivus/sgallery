@@ -23,9 +23,11 @@
         </p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <%= link_to 'Leave a comment.', "#{new_photo_comment_url(@photo)}", class: 'text-primary' %>
-        </li>
+        <% if logged_in? %>
+          <li class="list-group-item">
+            <%= link_to 'Leave a comment.', "#{new_photo_comment_url(@photo)}", class: 'text-primary' %>
+          </li>
+        <% end %>
         <%= render 'comments/thread', comments: @photo.comments, highlight: nil %>
       </ul>
     </div>
