@@ -1,4 +1,4 @@
-<a href="<%= photo_url(photo) %>" draggable="true" value="<%= photo.id %>"  ondragstart="event.dataTransfer.setData('text/plain', null)">
+<a href="<%= photo_url(photo) %>" draggable="true" value="<%= photo.id %>" ondragstart="event.dataTransfer.setData('text/plain', null)">
   <div class="card text-white">
     <img class="card-img" src="<%= photo.resource_url %>" alt="<%= photo.caption %>">
     <div class="card-img-overlay">
