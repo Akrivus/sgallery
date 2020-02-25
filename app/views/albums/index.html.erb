@@ -1,0 +1,15 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card my-2">
+      <div class="card-body">
+        <h4 class="card-title">Albums</h4>
+        <p class="card-text">Organize photos in albums.</p>
+        <ul class="list-group list-group-flush">
+          <% current_user.albums.each do |album| %>
+            <%= render 'albums/list', user: current_user, album: album %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

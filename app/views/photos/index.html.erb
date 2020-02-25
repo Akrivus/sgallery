@@ -1,9 +1,5 @@
-<div class="row my-1">
-  <div class="col-sm-7 col-12 order-sm-1 order-2">
-    <div class="card-columns">
-      <% @photos.each do |photo| %>
-        <%= render 'photos/photo', photo: photo %>
-      <% end %>
-    </div>
-  </div>
+<div class="card-columns my-1">
+  <% @photos.each do |photo| %>
+    <%= render 'photos/photo', photo: photo %>
+  <% end %>
 </div>
