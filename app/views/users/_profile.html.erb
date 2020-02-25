@@ -9,10 +9,10 @@
     </p>
     <% if can? :edit, user %>
       <%= link_to 'Edit', edit_user_url(user), class: 'btn btn-primary' %>
-      <% if can? :destroy, user %>
-        <br />
-        <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small text-danger w-100' %>
-      <% end %>
+    <% end %>
+    <% if can? :destroy, user %>
+      <br />
+      <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small text-danger w-100' %>
     <% end %>
   </div>
 </div>
