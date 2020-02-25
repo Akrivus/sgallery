@@ -30,6 +30,13 @@ document.addEventListener('drop', function (event) {
   }
 }, false);
 
+$(function() {
+  $('.custom-file-input').on('change', function() {
+    $('#' + $(this).attr('id') + '_image.custom-file-image').attr('src', window.URL.createObjectURL($(this)[0].files[0]));
+    $(this).next('.custom-file-label').html($(this).val().split('\\').pop());
+  })
+});
+
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

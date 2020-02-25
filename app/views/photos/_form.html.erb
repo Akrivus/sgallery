@@ -1,6 +1,9 @@
 <%= form_with(model: photo, local: true) do |form| %>
   <%= form.hidden_field :user_id, value: current_user.id %>
   <% unless photo.persisted? %>
+    <p class="card-text text-center">
+      <%= image_tag photo.resource_url, id: 'photo_resource_image', class: 'rounded-circle my-1 custom-file-image', height: 160, width: 160 %> 
+    </p>
     <div class="form-group">
       <div class="custom-file">
         <%= form.file_field :resource, class: 'custom-file-input' %>
