@@ -7,16 +7,6 @@
     </div>
   </div>
   <div class="col-sm-3 col-12 order-sm-2 order-1">
-    <div class="card">
-      <div class="card-body text-center">
-        <h4 class="card-title"><%= @album.title %></h4>
-        <% if can? :destroy, @album %>
-          <%= link_to 'Delete', user_album_url, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
-        <% end %>
-        <% if can? :edit, @album %>
-          <%= link_to 'Edit', edit_user_album_url, class: 'btn btn-primary w-25' %>
-        <% end %>
-      </div>
-    </div>
+    <%= render 'list', album: @album %>
   </div>
 </div>
