@@ -7,6 +7,9 @@
   <div class="col">
     <b><%= comment.user.name %></b>
     <p><%= comment.body %></p>
+    <p class="small text-muted">
+      Posted <%= comment.created_at.strftime('%A, %B %d, %Y') %>
+    </p>
   </div>
   <div class="col-1">
     <% if can? :destroy, comment %>

@@ -1,12 +1,18 @@
 <div class="card">
   <div class="card-body text-center">
-    <%= image_tag user.avatar_url, class: 'rounded-circle my-1', height: 160, width: 160 %>
+    <a href="<%= user_url(user) %>">
+      <%= image_tag user.avatar_url, class: 'rounded-circle my-1', height: 160, width: 160 %>
+    </a>
     <h4 class="card-title"><%= user.name %></h4>
+    <p class="small text-muted">
+      Joined <%= user.created_at.strftime('%A, %B %d, %Y') %>
+    </p>
     <% if can? :edit, user %>
-      <%= link_to 'Edit', edit_user_url(user), class: 'btn btn-primary w-25' %>
-    <% end %>
-    <% if can? :destroy, user %>
-      <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-25' %>
+      <%= link_to 'Edit', edit_user_url(user), class: 'btn btn-primary' %>
+      <% if can? :destroy, user %>
+        <br />
+        <%= link_to 'Delete', user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small text-danger w-100' %>
+      <% end %>
     <% end %>
   </div>
 </div>

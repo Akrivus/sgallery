@@ -21,6 +21,12 @@
             <%= link_to 'Home', user_url(current_user), class: 'nav-link' %>
           </li>
           <li class="nav-item">
+            <%= link_to 'Users', '/users', class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Photos', '/photos', class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
             <%= link_to 'Logout', '/logout', class: 'nav-link' %>
           </li>
           <% else %>
