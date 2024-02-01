@@ -1,5 +1,4 @@
 class IndexController < ApplicationController
-
   # GET /
   def index
     if logged_in?

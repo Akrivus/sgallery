@@ -21,20 +21,6 @@ class AlbumsController < ApplicationController
 
   end
 
-  # POST /users/1/albums/1/add_photo
-  def add_photo
-    @photo = Photo.find(params[:photo_id])
-    authorize! :edit, @photo
-    @photo.album = set_album
-    respond_to do |format|
-      if @photo.save
-        format.html { redirect_to [current_user, @album] }
-      else
-        format.html { redirect_to current_user }
-      end
-    end
-  end
-
   # POST /users/1/albums
   def create
     @album = Album.new(album_params)
@@ -63,6 +49,20 @@ class AlbumsController < ApplicationController
     @album.destroy
     respond_to do |format|
       format.html { redirect_to @user }
+    end
+  end
+
+  # POST /users/1/albums/1/add_photo
+  def add_photo
+    @photo = Photo.find(params[:photo_id])
+    authorize! :edit, @photo
+    @photo.album = set_album
+    respond_to do |format|
+      if @photo.save
+        format.html { redirect_to [current_user, @album] }
+      else
+        format.html { redirect_to current_user }
+      end
     end
   end
 

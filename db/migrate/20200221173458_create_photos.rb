@@ -3,7 +3,6 @@ class CreatePhotos < ActiveRecord::Migration[6.0]
     create_table :photos do |t|
       t.string :title
       t.string :caption
-      t.string :resource
       t.boolean :hidden
 
       t.timestamps

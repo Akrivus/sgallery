@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  mount_uploader :avatar, AvatarUploader
-  serialize :avatar, JSON
+  has_one_attached :avatar
 
   has_many :photos, dependent: :destroy
   has_many :comments, dependent: :destroy
