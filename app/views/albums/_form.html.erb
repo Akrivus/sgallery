@@ -1,10 +1,9 @@
-<%= form_with(model: [user, album], local: true) do |form| %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
+<%= form_with(model: album, local: true) do |form| %>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>
   </div>
-  <% @album.errors.full_messages.each do |error| %>
+  <% album.errors.full_messages.each do |error| %>
     <div class="invalid-feedback"><%= error %></div>
   <% end %>
   <%= form.submit class: 'btn btn-primary w-100' %>

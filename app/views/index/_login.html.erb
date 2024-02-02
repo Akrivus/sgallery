@@ -1,4 +1,4 @@
-<%= form_with(url: '/users/login', method: 'post', local: true) do |form| %>
+<%= form_with(url: login_users_url, method: 'post', local: true) do |form| %>
   <div class="form-group">
     <%= form.label :email, 'E-mail address' %>
     <%= form.text_field :email, class: 'form-control', placeholder: 'Enter e-mail address.' %>

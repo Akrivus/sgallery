@@ -1,7 +1,9 @@
 <div class="row justify-content-center">
   <div class="col-sm-6 col-12">
     <div class="card my-2">
-      <%= image_tag @photo.resource_url, class: 'card-image-top', height: 500 %>
+      <% if @photo.image.attached? %>
+        <%= image_tag @photo.image, class: 'card-image-top', height: 500 %>
+      <% end %>
       <div class="card-body">
         <h5 class="card-title">
         <%= @photo.title %>

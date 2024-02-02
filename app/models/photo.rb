@@ -1,6 +1,4 @@
 class Photo < ApplicationRecord
-  serialize :resource, JSON
-
   belongs_to :user
   belongs_to :album, optional: true
 

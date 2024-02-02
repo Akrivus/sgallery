@@ -6,7 +6,7 @@
         <p class="card-text">Organize photos in albums.</p>
         <ul class="list-group list-group-flush">
           <% current_user.albums.each do |album| %>
-            <%= render 'albums/list', user: current_user, album: album %>
+            <%= render 'albums/item', album: album %>
           <% end %>
         </ul>
       </div>

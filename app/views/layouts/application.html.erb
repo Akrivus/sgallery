@@ -8,11 +8,12 @@
     <%= stylesheet_link_tag "application" %>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-      <a class="navbar-brand" href="#"><span class="text-primary">Photo</span><span class="text-warning">Go</span></a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-2">
+      <a class="navbar-brand" href="#"><span class="text-invalid">Photo</span><span class="text-warning">Go</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,13 +39,13 @@
           <% end %>
         </ul>
         <% unless logged_in? %>
-          <%= link_to 'Sign Up', new_user_url, class: 'btn btn-outline-success' %>
+          <%= link_to 'Sign Up', new_user_url, class: 'btn btn-success float-right' %>
         <% else %>
           <%= render 'photos/search' %>
         <% end %>
       </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid py-3">
       <%= yield %>
     </div>
   </body>

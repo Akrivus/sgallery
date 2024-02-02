@@ -1,7 +1,7 @@
 <%= form_with(model: user, html: { multipart: true }) do |form| %>
   <% if user.persisted? %>
     <p class="card-text text-center">
-      <%= image_tag user.avatar_url, id: 'user_avatar_image', class: 'rounded-circle my-1 custom-file-image', height: 160, width: 160 %> 
+      <%= image_tag user.avatar, id: 'user_avatar_image', class: 'rounded-circle my-1 custom-file-image', height: 160, width: 160 %> 
     </p>
   <% end %>
   <div class="form-group">
@@ -42,5 +42,5 @@
   <% user.errors.full_messages.each do |error| %>
     <div class="invalid-feedback"><%= error %></div>
   <% end %>
-  <%= form.submit, class: 'btn btn-primary w-100' %>
+  <%= form.submit class: 'btn btn-primary w-100' %>
 <% end %>

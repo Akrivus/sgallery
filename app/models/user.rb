@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def admin?
     self.admin
   end
+
+  def collect_albums
+    albums.all.collect { |album| [ album.title, album.id ] }
+  end
 end

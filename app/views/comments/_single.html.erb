@@ -1,7 +1,7 @@
 <div class="row <%= 'bg-warning' if comment.eql? highlight %>">
   <div class="col-1">
     <a class="avatar float-left" href="<%= user_url(comment.user) %>">
-      <%= image_tag comment.user.avatar_url %>
+      <%= image_tag comment.user.avatar %>
     </a>
   </div>
   <div class="col">

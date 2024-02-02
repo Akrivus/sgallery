@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
-    @photo = Photo.new
+    @photo = current_user.photos.new
   end
 
   # GET /photos/1/edit
@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
 
   # POST /photos
   def create
-    @photo = Photo.new(photo_params)
+    @photo = current_user.photos.new(photo_params)
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo }
@@ -39,7 +39,6 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
-      params[:photo].delete(:resource)
       if @photo.update(photo_params)
         format.html { redirect_to @photo }
       else
@@ -65,6 +64,6 @@ class PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:title, :caption, :resource, :hidden, :user_id, :album_id)
+      params.require(:photo).permit(:title, :caption, :hidden, :album_id, :image)
     end
 end

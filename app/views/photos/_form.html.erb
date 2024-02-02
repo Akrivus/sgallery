@@ -1,16 +1,15 @@
-<%= form_with(model: photo, local: true) do |form| %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  <% unless photo.persisted? %>
+<%= form_with(model: @photo, local: true) do |form| %>
+  <% if @photo.image.attached? %>
     <p class="card-text text-center">
-      <%= image_tag photo.resource_url, id: 'photo_resource_image', class: 'rounded-circle my-1 custom-file-image', height: 160, width: 160 %> 
+      <%= image_tag @photo.image, id: 'photo_resource_image', class: 'rounded-circle my-1 custom-file-image', height: 160, width: 160 %> 
     </p>
-    <div class="form-group">
-      <div class="custom-file">
-        <%= form.file_field :image, class: 'custom-file-input' %>
-        <%= form.label :image, 'Choose photo.', class: 'custom-file-label'%>
-      </div>
-    </div>
   <% end %>
+  <div class="form-group">
+    <div class="custom-file">
+      <%= form.file_field :image, class: 'custom-file-input' %>
+      <%= form.label :image, 'Choose photo.', class: 'custom-file-label'%>
+    </div>
+  </div>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control', placeholder: 'Enter title.' %>
@@ -27,7 +26,7 @@
   </div>
   <div class="form-group">
     <%= form.label :album_id, 'Album' %>
-    <%= form.select(:album_id, [['None', nil]] + current_user.albums.all.collect { |album| [ album.title, album.id ] }, {}, { class: 'form-control' }) %>
+    <%= form.select(:album_id, [['None', nil]] + current_user.collect_albums, {}, { class: 'form-control' }) %>
   </div>
   <% @photo.errors.full_messages.each do |error| %>
     <div class="invalid-feedback"><%= error %></div>
