@@ -8,3 +8,4 @@ Users can create accounts, upload photos, add them to albums, and comment on bot
 
 ## Plans
 Use the photo descriptions as prompts, and just post an AI-generated image, with no prompt. Leave image for interpretation in comments.
+(As of June 2024, I'm tired of giving away AI compute as a business model, so that's not happening haha.)
